@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <th:block th:insert="/fragments/resources-header" />
+</head>
+
+
+<!--
+`body` tag options:
+
+  Apply one or more of the following classes to to the body tag
+  to get the desired effect
+
+  * sidebar-collapse
+  * sidebar-mini
+-->
+<body class="hold-transition layout-navbar-fixed layout-footer-fixed"
+	th:classappend="${session.usuarioLogin} ?  'sidebar-mini sidebar-collapse' : 'layout-top-nav'">
+<div class="wrapper">
+  <!-- Navbar -->
+  <th:block th:insert="/fragments/navbar" />
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <th:block th:if="${session.usuarioLogin}" th:insert="/fragments/sidebar" />
+
+  <!-- Content Wrapper. Contains page content -->
+  <th:block th:insert="/home/home-content" />
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <th:block th:insert="/fragments/footer" />
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<th:block th:insert="/fragments/resources-footer" />
+
+<!-- OPTIONAL SCRIPTS -->
+
+</body>
+</html>

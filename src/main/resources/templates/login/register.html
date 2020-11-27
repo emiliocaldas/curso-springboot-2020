@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:insert="/fragments/resources-header" />
+</head>
+<body class="hold-transition register-page">
+	<div class="register-box">
+		<div class="card card-outline card-primary">
+			<div class="card-header text-center">
+				<a href="#" class="h1"><b>Mitocode</b> Web </a>
+			</div>
+			<div class="card-body">
+				<p class="login-box-msg" th:text="#{register.message}"></p>
+
+				<form th:action="@{/registeruser}" method="post"
+					th:object="${registerForm}">
+					
+					<div th:if="${useralreadyexists}"
+						th:text="#{register.exceptions.userexists}"
+						class="alert alert-danger"></div>
+					<div th:if="${registersuccess}"
+						th:utext="#{register.forms.success}" class="alert alert-success"></div>					
+					
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" placeholder="Full name"
+							required="required" th:field="*{fullName}"
+							th:classappend="${#fields.hasErrors('fullName')} ? 'is-invalid'">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-user"></span>
+							</div>
+						</div>
+						<span class="error invalid-feedback"
+							th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>						
+					</div>
+					
+					<div class="input-group mb-3">
+						<input type="email" class="form-control" placeholder="Email"
+							required="required" th:field="*{email}"
+							th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-envelope"></span>
+							</div>
+						</div>
+						<span class="error invalid-feedback"
+							th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>						
+					</div>
+					
+					<div class="input-group mb-3">
+						<input type="password" class="form-control" placeholder="Password"
+							required="required" th:field="*{password}"
+							th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-lock"></span>
+							</div>
+						</div>
+						<span class="error invalid-feedback"
+							th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>						
+					</div>
+					
+					<div class="input-group mb-3">
+						<input type="password" class="form-control"
+							placeholder="Retype password" required="required"
+							th:field="*{confirmPassword}"
+							th:classappend="${#fields.hasErrors('confirmPassword')} ? 'is-invalid'">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-lock"></span>
+							</div>
+						</div>
+						<span class="error invalid-feedback"
+							th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>						
+					</div>
+					
+					<div class="row">
+						<div class="col-8">
+							<div class="icheck-primary">
+								<input type="checkbox" id="agreeTerms" name="terms"
+									value="agree"> <label for="agreeTerms"
+									th:utext="#{register.label.iagreeterms}"></label>
+							</div>
+						</div>
+						<!-- /.col -->
+						<div class="col-4">
+							<button type="submit" class="btn btn-primary btn-block"
+								th:text="#{register.forms.buttontext}"></button>
+						</div>
+						<!-- /.col -->
+					</div>
+				</form>
+
+				<div class="social-auth-links text-center">
+					<a href="#" class="btn btn-block btn-primary"> <i
+						class="fab fa-facebook mr-2"></i> Sign up using Facebook
+					</a> <a href="#" class="btn btn-block btn-danger"> <i
+						class="fab fa-google-plus mr-2"></i> Sign up using Google+
+					</a>
+				</div>
+
+				<a th:href="@{/login}" class="text-center"
+					th:text="#{register.label.alreadymember}"></a>
+			</div>
+			<!-- /.form-box -->
+		</div>
+		<!-- /.card -->
+	</div>
+	<!-- /.register-box -->
+
+	<th:block th:insert="/fragments/resources-footer" />
+</body>
+</html>
